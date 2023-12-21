@@ -28,49 +28,59 @@ Le projet est composé de plusieurs services Docker :
 1. Clonez le dépôt sur votre machine.
 
     ```bash
-    git clone https://github.com/pascalito007/ynov-resources.git
+    git clone https://github.com/Ynshmd/ynov-resources.git
     cd 2023/m2/dataeng/humans-best-friend
     ```
 
-2. Créez un fichier `docker-compose.build.yml` pour construire les images des applications à partir du Dockerfile.
+2.Installation de redis et postgre
+    ```bash
+   docker pull redis
+    ````
+
+````bash
+    docker pull postgres:15-alpine
+   ````
+3.  TAG
+
+```bash
+   docker tag postgres:15-alpine localhost:5000/postgres:15-alpine
+````
+
+```bash
+ docker tag redis:latest localhost:5000/redis:latest
+````
+
+4. Créez un fichier `docker-compose.build.yml` pour construire les images des applications à partir des Dockerfiles.
 
     ```yaml
-    # Votre contenu pour docker-compose.build.yml
+    docker compose  -f docker-compose.build.yml up -d
     ```
 
-3. Construisez les images sans exécuter de conteneurs.
 
-    ```bash
-    docker-compose -f docker-compose.build.yml build
-    ```
 
-4. Créez un fichier `docker-compose.yml` pour déployer l'application.
+5. Créez un fichier `docker-compose.yml` pour déployer l'application.
 
     ```yaml
-    # Votre contenu pour docker-compose.yml
+    docker-compose.yml
     ```
 
-5. Déployez l'application.
+6. Déployez l'application.
 
     ```bash
-    docker-compose up -d
+    docker compose up -d
     ```
 
 ## Accès aux Services
 
-- Backend API : [http://localhost:3000](http://localhost:3000)
-- Vote Service : [http://localhost:5002](http://localhost:5002)
-- Worker Service : Intégré dans le réseau back-tier
-- Seed Data Service : Intégré dans le réseau front-tier
-- Result Service : [http://localhost:5001](http://localhost:5001)
 
-## Personnalisation
+- Vote Service : [http://localhost:5005](http://localhost:5005)
+- Worker Service : Intégré dans le réseau humansbestfriend-network
+- Seed Data Service : Intégré dans le réseau humansbestfriend-network
+- Result Service : [http://localhost:5004](http://localhost:5004)
 
-Vous pouvez personnaliser le projet en modifiant les fichiers de configuration et les Dockerfiles selon vos besoins.
 
-## Contributions
 
-Les contributions sont les bienvenues! Avant de contribuer, veuillez lire notre [guide de contribution](CONTRIBUTING.md).
+
 
 ## Auteurs
 
